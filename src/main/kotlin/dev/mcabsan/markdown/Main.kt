@@ -1,4 +1,4 @@
-package dev.kata.stringcalculator
+package dev.mcabsan.markdown
 
 fun main() {
     println("Hello world!")
