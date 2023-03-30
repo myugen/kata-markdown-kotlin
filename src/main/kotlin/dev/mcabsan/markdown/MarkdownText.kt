@@ -3,17 +3,21 @@ package dev.mcabsan.markdown
 data class MarkdownText(private val content: String) {
     fun transform(): String {
         val links = findLinks()
+        val allUrls = links.map { it.url }.distinct()
         var contentToTransform = content
-        for ((index, link) in links.withIndex()) {
+        for (link in links) {
+            val index = allUrls.indexOf(link.url)
             val anchor = "[^anchor${index + 1}]"
             val transformedContent = contentToTransform.replaceFirst(link.asMarkdownText(), "${link.label}$anchor")
-            val footnoteDefinition = """
-                $anchor: ${link.url}
-            """.trimIndent()
-            contentToTransform = "$transformedContent\n\n$footnoteDefinition"
+            contentToTransform = transformedContent
         }
-
-        return contentToTransform
+        var footnotes = "\n"
+        for (url in allUrls) {
+            val index = allUrls.indexOf(url)
+            val anchor = "[^anchor${index + 1}]"
+            footnotes = "$footnotes\n$anchor: $url"
+        }
+        return "$contentToTransform$footnotes"
     }
 
     private fun findLinks(): List<Link> {
