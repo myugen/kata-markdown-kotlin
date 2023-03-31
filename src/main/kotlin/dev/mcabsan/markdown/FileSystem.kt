@@ -8,7 +8,7 @@ class FileSystem {
         return Files.readString(Path(filePath.value))
     }
 
-    fun write(destination: FilePath, content: String) {
-        Files.writeString(Path(destination.value), content)
+    fun write(filePath: FilePath, content: String) {
+        Files.writeString(Path(filePath.value), content)
     }
 }
