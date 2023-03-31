@@ -22,30 +22,6 @@ class MarkdownTextShould {
             
             El libro de [Código Sostenible](https://www.codigosostenible.com)
             es un librazo. ¡Cómpralo!
-        """.trimIndent()
-        val markdownText = MarkdownText.from(content)
-
-        val actual = markdownText.transform()
-
-        assertThat(actual).isEqualTo(
-            """
-            # Test file
-            
-            El libro de Código Sostenible[^anchor1]
-            es un librazo. ¡Cómpralo!
-            
-            [^anchor1]: https://www.codigosostenible.com
-            """.trimIndent()
-        )
-    }
-
-    @Test
-    fun `retrieve transformed content turning multiple links with same URL into footnote with shared anchors per URL`() {
-        val content = """
-            # Test file
-            
-            El libro de [Código Sostenible](https://www.codigosostenible.com)
-            es un librazo. ¡Cómpralo!
             
             De verdad, [Código Sostenible](https://www.codigosostenible.com) es un libro
             muy recomendable.

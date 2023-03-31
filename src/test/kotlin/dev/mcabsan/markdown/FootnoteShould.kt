@@ -34,7 +34,7 @@ class FootnoteShould {
     }
 
     @Test
-    fun `throw an exeption when trying to get anchor tag for a link that is not in the footnote`() {
+    fun `throw an exception when trying to get anchor tag for a link that is not in the footnote`() {
         val linkNotInFootnote = Link(Label("Otro libro"), URL("https://www.otrolibro.com"))
 
         val codigoSostenibleLink = Link(Label("Código Sostenible"), URL("https://www.codigosostenible.com"))
