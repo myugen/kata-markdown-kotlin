@@ -1,7 +1,7 @@
 package dev.mcabsan.markdown
 
-data class Link(val label: String, val url: String) {
+data class Link(val label: Label, val url: URL) {
     fun asMarkdownText(): String {
-        return "[$label]($url)"
+        return "[${label.value}](${url.value})"
     }
 }

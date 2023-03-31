@@ -8,8 +8,8 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.Path
 
-internal class LinkToFootnoteShould {
-    private val sut = LinkToFootnote(FileSystem())
+internal class LinkToFootnoteCommandShould {
+    private val sut = LinkToFootnoteCommand(FileSystem())
 
     @BeforeEach
     fun `create test files`() {

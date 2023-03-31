@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 class FootnoteShould {
     @Test
     fun `create a footnote text with shared anchors per URL`() {
-        val codigoSostenibleLink = Link("Código Sostenible", "https://www.codigosostenible.com")
-        val codigoSostenibleLink2 = Link("Otro Código Sostenible", "https://www.codigosostenible.com")
-        val savvilyLink = Link("Savvily", "https://www.savvily.es")
+        val codigoSostenibleLink = Link(Label("Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val codigoSostenibleLink2 = Link(Label("Otro Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val savvilyLink = Link(Label("Savvily"), URL("https://www.savvily.es"))
         val footnote = Footnote.from(listOf(codigoSostenibleLink, codigoSostenibleLink2, savvilyLink))
 
         val actual = footnote.asMarkdownText()
@@ -23,9 +23,9 @@ class FootnoteShould {
 
     @Test
     fun `get relevant anchor tag for link`() {
-        val codigoSostenibleLink = Link("Código Sostenible", "https://www.codigosostenible.com")
-        val codigoSostenibleLink2 = Link("Otro Código Sostenible", "https://www.codigosostenible.com")
-        val savvilyLink = Link("Savvily", "https://www.savvily.es")
+        val codigoSostenibleLink = Link(Label("Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val codigoSostenibleLink2 = Link(Label("Otro Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val savvilyLink = Link(Label("Savvily"), URL("https://www.savvily.es"))
         val footnote = Footnote.from(listOf(codigoSostenibleLink, codigoSostenibleLink2, savvilyLink))
 
         val actual = footnote.anchorTagFor(codigoSostenibleLink.url)
@@ -35,11 +35,11 @@ class FootnoteShould {
 
     @Test
     fun `throw an exeption when trying to get anchor tag for a link that is not in the footnote`() {
-        val linkNotInFootnote = Link("Otro libro", "https://www.otrolibro.com")
+        val linkNotInFootnote = Link(Label("Otro libro"), URL("https://www.otrolibro.com"))
 
-        val codigoSostenibleLink = Link("Código Sostenible", "https://www.codigosostenible.com")
-        val codigoSostenibleLink2 = Link("Otro Código Sostenible", "https://www.codigosostenible.com")
-        val savvilyLink = Link("Savvily", "https://www.savvily.es")
+        val codigoSostenibleLink = Link(Label("Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val codigoSostenibleLink2 = Link(Label("Otro Código Sostenible"), URL("https://www.codigosostenible.com"))
+        val savvilyLink = Link(Label("Savvily"), URL("https://www.savvily.es"))
 
         val footnote = Footnote.from(listOf(codigoSostenibleLink, codigoSostenibleLink2, savvilyLink))
 

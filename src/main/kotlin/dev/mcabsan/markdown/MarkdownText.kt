@@ -8,12 +8,15 @@ data class MarkdownText private constructor(
 
     fun transform(): String {
         if (links.isEmpty()) return content
-
-        val transformedText = links.fold(content) { acc, link ->
-            acc.replace(link.asMarkdownText(), "${link.label}${footnotes.anchorTagFor(link.url)}")
-        }
-        return "$transformedText\n\n${footnotes.asMarkdownText()}"
+        val transformedText = replaceLinksForAnchors()
+        return includeFootnoteIn(transformedText)
     }
+
+    private fun replaceLinksForAnchors() = links.fold(content) { acc, link ->
+        acc.replace(link.asMarkdownText(), "${link.label.value}${footnotes.anchorTagFor(link.url)}")
+    }
+
+    private fun includeFootnoteIn(transformedText: String) = "$transformedText\n\n${footnotes.asMarkdownText()}"
 
     companion object {
         fun from(content: String): MarkdownText {
@@ -27,9 +30,9 @@ data class MarkdownText private constructor(
             val matches = linksRegex.findAll(content)
             return matches.map { match ->
                 match.groups.size.takeIf { it >= 3 }.let {
-                    val label = match.groups[1]!!.value.replace("[", "").replace("]", "")
-                    val url = match.groups[2]!!.value.replace("(", "").replace(")", "")
-                    Link(label, url)
+                    val labelText = match.groups[1]!!.value.replace("[", "").replace("]", "")
+                    val urlText = match.groups[2]!!.value.replace("(", "").replace(")", "")
+                    Link(Label(labelText), URL(urlText))
                 }
             }.toList()
         }
