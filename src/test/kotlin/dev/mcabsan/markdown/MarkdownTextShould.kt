@@ -8,7 +8,7 @@ class MarkdownTextShould {
     @Test
     fun `retrieve same content when there is no any link`() {
         val content = "# Test file"
-        val markdownText = MarkdownText(content)
+        val markdownText = MarkdownText.from(content)
 
         val actual = markdownText.transform()
 
@@ -23,7 +23,7 @@ class MarkdownTextShould {
             El libro de [Código Sostenible](https://www.codigosostenible.com)
             es un librazo. ¡Cómpralo!
         """.trimIndent()
-        val markdownText = MarkdownText(content)
+        val markdownText = MarkdownText.from(content)
 
         val actual = markdownText.transform()
 
@@ -52,7 +52,7 @@ class MarkdownTextShould {
             
             Buscadlo en [Savvily](https://www.savvily.es)
         """.trimIndent()
-        val markdownText = MarkdownText(content)
+        val markdownText = MarkdownText.from(content)
 
         val actual = markdownText.transform()
 
