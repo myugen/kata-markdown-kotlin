@@ -19,7 +19,9 @@ class FileSystemShould {
     @AfterEach
     fun `delete test files`() {
         val source = Path("test.md")
+        val destination = Path("test-footnote.md")
         Files.deleteIfExists(source)
+        Files.deleteIfExists(destination)
     }
 
     @Test
@@ -27,5 +29,15 @@ class FileSystemShould {
         val content = sut.read(FilePath("test.md"))
 
         assertThat(content).isEqualTo("# Test file")
+    }
+
+    @Test
+    fun `write the content of a file`() {
+        val destination = FilePath("test-footnote.md")
+        val content = "# Test file"
+
+        sut.write(destination, content)
+
+        assertThat(Files.readString(Path(destination.value))).isEqualTo(content)
     }
 }
