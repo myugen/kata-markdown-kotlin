@@ -5,6 +5,6 @@ class LinkToFootnote(private val fileSystem: FileSystem) {
         val content = fileSystem.read(source)
         val markdown = MarkdownText.from(content)
         val transformedMarkdown = markdown.transform()
-        TODO("Not yet implemented")
+        fileSystem.write(destination, transformedMarkdown)
     }
 }
